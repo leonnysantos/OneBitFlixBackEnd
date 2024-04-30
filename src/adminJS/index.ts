@@ -34,6 +34,7 @@ export const adminJs = new AdminJs({
         }
     }
 })
+
 export const adminJsRouter = AdminJsExpress.buildAuthenticatedRouter(adminJs, {
     authenticate: async (email, password) => {
         const user = await User.findOne({ where: { email } })
