@@ -11,12 +11,12 @@ export default function Dashboard() {
     }, [])
 
     async function fetchDashboardData() {
+        const api = new ApiClient();
         try {
-            const api = new ApiClient()
-            const res = await api.getDashboard()
-            setResources(res.data)
+            const res = await api.getDashboard();
+            setResources(res.data);
         } catch (error) {
-            console.error('Erro:', error)
+            console.error('Erro:', error);
         }
     }
 
