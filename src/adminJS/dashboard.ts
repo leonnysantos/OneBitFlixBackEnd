@@ -5,7 +5,7 @@ export const dashboardOptions: {
     handler?: PageHandler
     component?: string
 } = {
-    component: AdminJs.bundle('../adminjs/components/Dashboard'),
+    component: AdminJs.bundle('./components/Dashboard'),
     handler: async (req, res, context) => {
         const courses = await Course.count()
         const episodes = await Episode.count()
@@ -16,7 +16,7 @@ export const dashboardOptions: {
             'Cursos': courses,
             'Episódios': episodes,
             'Categorias': category,
-            'Usuários Padrão': standardUsers
+            'Usuários': standardUsers
         })
     },
 }

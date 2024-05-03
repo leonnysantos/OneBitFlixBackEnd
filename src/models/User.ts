@@ -13,11 +13,13 @@ export interface User {
     role: 'admin' | 'user'
 }
 
-export interface UserCreationAttributes extends Optional<User, 'id'> { }
+export interface UserCreationAttributes
+    extends Optional<User, 'id'> { }
 
-export interface UserInstance extends Model<User, UserCreationAttributes>, User { }
+export interface UserInstance
+    extends Model<User, UserCreationAttributes>, User { }
 
-export const User = sequelize.define<UserInstance, User>('User', {
+export const User = sequelize.define<UserInstance, User>('users', {
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -54,16 +56,13 @@ export const User = sequelize.define<UserInstance, User>('User', {
     },
     role: {
         allowNull: false,
-        type: DataTypes.STRING,
-        validate: {
-            isIn: [['admin', 'user']]
-        }
+        type: DataTypes.STRING
     }
 }, {
     hooks: {
         beforeSave: async (user) => {
             if (user.isNewRecord || user.changed('password')) {
-                user.password = await bcrypt.hash(user.password.toString(), 10)
+                user.password = await bcrypt.hash(user.password.toString(), 10);
             }
         }
     }

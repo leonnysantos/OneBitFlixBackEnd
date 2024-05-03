@@ -5,19 +5,17 @@ import { ApiClient, useCurrentAdmin } from 'adminjs'
 export default function Dashboard() {
     const [currentAdmin] = useCurrentAdmin()
     const [resources, setResources] = useState<{ [key: string]: number }>()
+    const api = new ApiClient()
 
     useEffect(() => {
         fetchDashboardData()
     }, [])
 
     async function fetchDashboardData() {
-        const api = new ApiClient();
-        try {
-            const res = await api.getDashboard();
-            setResources(res.data);
-        } catch (error) {
-            console.error('Erro:', error);
-        }
+        const res = await api.getDashboard()
+        console.log(res.data)
+
+        setResources(res.data)
     }
 
     return (
@@ -35,8 +33,7 @@ export default function Dashboard() {
                     </TableHead>
                     <TableBody>
                         {
-                            resources
-                                ?
+                            resources ?
                                 Object.entries(resources).map(([resource, count]) => (
                                     <TableRow key={resource}>
                                         <TableCell>{resource}</TableCell>
