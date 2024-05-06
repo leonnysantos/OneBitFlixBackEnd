@@ -1,10 +1,13 @@
 import express from 'express'
 import { sequelize } from './database'
 import { adminJs, adminJsRouter } from './adminJS'
+import { router } from './routes'
 
 const app = express()
 
 app.use(express.static('public'))
+
+app.use(router)
 
 app.use(adminJs.options.rootPath, adminJsRouter)
 
