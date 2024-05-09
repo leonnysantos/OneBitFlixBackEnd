@@ -27,6 +27,6 @@ export const likeService = {
             }
         })
 
-        return like
+        return like !== null ? true : false
     }
 }
